@@ -45,7 +45,7 @@
               <img src="${tweetSvg}" alt="Tweet"/>
           </a>
         <div class="text">
-          <h1>Welcome!</h1>
+          <h1>Hi!</h1>
           <h2>You just created a Java Spring web application.</h2>
         </div>
       </div>
