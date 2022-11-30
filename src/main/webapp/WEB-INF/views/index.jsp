@@ -49,19 +49,6 @@
         </div>
         <div id="myExample">
           <% out.println("IP Address is: " + request.getLocalAddr()); %>
-          <%
-URL url = new URL("curl http://169.254.169.254/latest/meta-data/local-ipv4");
-HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-connection.setRequestMethod("GET");
-connection.connect();
-BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-String line=reader.readLine(); 
-while(line!=null) 
-{ 
-   out.println(line); 
-   line=reader.readLine(); 
-}
-%>
         </div>
       </div>
     </div>
