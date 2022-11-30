@@ -45,7 +45,7 @@
               <img src="${tweetSvg}" alt="Tweet"/>
           </a>
         <div class="text">
-          <h2>Hello to AWS DevOps Nov-2022 Batch of TCS!!!</h2>
+          <h2>Hello to AWS DevOps Dec-2022 Batch of TCS!!!</h2>
         </div>
         <div id="myExample">
           <% out.println("IP Address is: " + request.getLocalAddr()); %>
