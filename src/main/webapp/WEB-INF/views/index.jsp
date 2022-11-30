@@ -48,7 +48,7 @@
           <h2>Hello to AWS DevOps Nov-2022 Batch of TCS!!!</h2>
         </div>
         <div id="myExample">
-          serverIP is <b><%=request.getLocalAddr()%></b>
+          <% out.println("IP Address is: " + request.getLocalAddr()); %>
         </div>
       </div>
     </div>
