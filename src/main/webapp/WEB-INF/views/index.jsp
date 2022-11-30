@@ -47,6 +47,9 @@
         <div class="text">
           <h2>Hello to AWS DevOps Nov-2022 Batch of TCS!!!</h2>
         </div>
+        <div id="myExample">
+          Server host name is: <b><%=request.getServerName() %></b>
+        </div>
       </div>
     </div>
 
