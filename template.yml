@@ -1,54 +1,45 @@
 AWSTemplateFormatVersion: 2010-09-09
-Conditions:
-  UseSubnet: !Not [!Equals [!Ref 'SubnetId', subnet-none]]
-  IsBurstableInstanceType: !Equals [!Select [0, !Split ['.', !Ref InstanceType]], t3]
-Transform:
-- AWS::CodeStar
 Parameters:
   ProjectId:
     Type: String
+    Default: webapp
     Description: AWS CodeStar project ID used to name project resources and create roles.
   InstanceType:
     Type: String
+    Default: t2.micro
     Description: The type of Amazon EC2 Linux instances that will be launched for this project.
   WebAppInstanceProfile:
      Type: String
+     Default: EC2S3FullAccessRole
      Description: The IAM role that will be created for the Amazon EC2 Linux instances.
   ImageId:
     Type: String
+    Default: ami-0b5eea76982371e91
     Description: The Amazon EC2 Linux instance Amazon Machine Image (AMI), which designates the configuration of the new instance.
   KeyPairName:
     Type: String
+    Default: 'aws'
     Description: The name of an existing Amazon EC2 key pair in the region where the project is created, which you can use to SSH into the new Amazon EC2 Linux instances.
   VpcId:
     Type: String
+    Default: vpc-0fb4a9f744085166e
     Description: The ID of the Amazon Virtual Private Cloud (VPC) to use for Amazon EC2 instances.
   SubnetId:
     Type: String
+    Default: subnet-00dbab1392f8e9f12
     Description: The name of the VPC subnet to use for Amazon EC2 instances launched for this project.
   Stage:
     Type: String
     Description: The name for a project pipeline stage, such as Staging or Prod, for which resources are provisioned and deployed.
-    Default: ''
+    Default: 'dev'
 Resources:
   WebApp01:
     Description: The installation and configuration commands this project will use to create instances that support this sample web application.
     Properties:
-      CreditSpecification:
-        CPUCredits: !If [IsBurstableInstanceType, unlimited, !Ref 'AWS::NoValue']
       IamInstanceProfile: !Ref 'WebAppInstanceProfile'
       ImageId: !Ref 'ImageId'
       InstanceType: !Ref 'InstanceType'
       KeyName: !Ref 'KeyPairName'
-      NetworkInterfaces:
-      - AssociatePublicIpAddress: true
-        DeviceIndex: 0
-        GroupSet:
-        - !Ref 'WebAppSG'
-        SubnetId: !If
-        - UseSubnet
-        - !Ref 'SubnetId'
-        - !Ref 'AWS::NoValue'
       Tags:
       - Key: Environment
         Value: !Sub '${ProjectId}-WebApp${Stage}'
