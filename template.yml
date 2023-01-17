@@ -1,9 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
 Parameters:
-  ProjectId:
-    Type: String
-    Default: webapp
-    Description: AWS CodeStar project ID used to name project resources and create roles.
   InstanceType:
     Type: String
     Default: t2.micro
@@ -42,9 +38,9 @@ Resources:
       KeyName: !Ref 'KeyPairName'
       Tags:
       - Key: Environment
-        Value: !Sub '${ProjectId}-WebApp${Stage}'
+        Value: !Sub 'WebApp-${Stage}'
       - Key: Name
-        Value: !Sub '${ProjectId}-WebApp${Stage}'
+        Value: !Sub 'WebApp-${Stage}'
       UserData:
         Fn::Base64:
           Fn::Sub: |
@@ -68,8 +64,6 @@ Resources:
   WebApp02:
     Description: The installation and configuration commands this project will use to create instances that support this sample web application.
     Properties:
-      CreditSpecification:
-        CPUCredits: !If [IsBurstableInstanceType, unlimited, !Ref 'AWS::NoValue']
       IamInstanceProfile: !Ref 'WebAppInstanceProfile'
       ImageId: !Ref 'ImageId'
       InstanceType: !Ref 'InstanceType'
@@ -85,9 +79,9 @@ Resources:
         - !Ref 'AWS::NoValue'
       Tags:
       - Key: Environment
-        Value: !Sub '${ProjectId}-WebApp${Stage}'
+        Value: !Sub 'WebApp-${Stage}'
       - Key: Name
-        Value: !Sub '${ProjectId}-WebApp${Stage}'
+        Value: !Sub 'WebApp-${Stage}'
       UserData:
         Fn::Base64:
           Fn::Sub: |
