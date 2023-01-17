@@ -68,15 +68,6 @@ Resources:
       ImageId: !Ref 'ImageId'
       InstanceType: !Ref 'InstanceType'
       KeyName: !Ref 'KeyPairName'
-      NetworkInterfaces:
-      - AssociatePublicIpAddress: true
-        DeviceIndex: 0
-        GroupSet:
-        - !Ref 'WebAppSG'
-        SubnetId: !If
-        - UseSubnet
-        - !Ref 'SubnetId'
-        - !Ref 'AWS::NoValue'
       Tags:
       - Key: Environment
         Value: !Sub 'WebApp-${Stage}'
