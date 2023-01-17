@@ -19,4 +19,6 @@ artifacts:
     - 'template.yml'
     - 'scripts/*'
     - 'target/ROOT.war'
-    - 'template-configuration.json'
+    - Dockerfile
+    - buildspec_docker.yml
+  discard-paths: no
