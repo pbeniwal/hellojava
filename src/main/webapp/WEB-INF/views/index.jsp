@@ -45,13 +45,13 @@
               <img src="${tweetSvg}" alt="Tweet"/>
           </a>
         <div class="text">
-          <h2>Hello to AWS DevOps Dec-2022 Batch of TCS</h2>
+          <h2>Hello to AWS DevOps Jul-2023 Batch of TCS</h2>
         </div>
       </div>
     </div>
 
     <footer>
-      <p class="footer-contents">Designed and developed with <a href="https://aws.amazon.com/careers/devtools-jobs/">♥</a> in Seattle.</p>
+      <p class="footer-contents">Designed and developed with <a href="https://aws.amazon.com/careers/devtools-jobs/">♥</a> in Pune.</p>
     </footer>
 
     <script src={$setBackgroundJs}"></script>
