@@ -72,7 +72,7 @@ Resources:
       - Key: Environment
         Value: "hellojava"
       - Key: Name
-        Value: !Sub 'hellojava-${Stage}'
+        Value: "hellojava"
       UserData:
         Fn::Base64:
           Fn::Sub: |
