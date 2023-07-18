@@ -1,0 +1,78 @@
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t2.medium
+    Description: The type of Amazon EC2 Linux instances that will be launched for this project.
+  WebAppInstanceProfile:
+     Type: String
+     Default: EC2S3FullAccessRole
+     Description: The IAM role that will be created for the Amazon EC2 Linux instances.
+  ImageId:
+    Type: String
+    Default: ami-0b5eea76982371e91
+    Description: The Amazon EC2 Linux instance Amazon Machine Image (AMI), which designates the configuration of the new instance.
+  KeyPairName:
+    Type: String
+    Default: 'aws'
+    Description: The name of an existing Amazon EC2 key pair in the region where the project is created, which you can use to SSH into the new Amazon EC2 Linux instances.
+  VpcId:
+    Type: String
+    Default: vpc-0fb4a9f744085166e
+    Description: The ID of the Amazon Virtual Private Cloud (VPC) to use for Amazon EC2 instances.
+  SubnetId:
+    Type: String
+    Default: subnet-00dbab1392f8e9f12
+    Description: The name of the VPC subnet to use for Amazon EC2 instances launched for this project.
+  Stage:
+    Type: String
+    Description: The name for a project pipeline stage, such as Staging or Prod, for which resources are provisioned and deployed.
+    Default: 'prod'
+Resources:
+  WebApp01:
+    Description: The installation and configuration commands this project will use to create instances that support this sample web application.
+    Properties:
+      IamInstanceProfile: !Ref 'WebAppInstanceProfile'
+      ImageId: !Ref 'ImageId'
+      InstanceType: !Ref 'InstanceType'
+      KeyName: !Ref 'KeyPairName'
+      Tags:
+      - Key: Environment
+        Value: "hellojava"
+      - Key: Name
+        Value: !Sub 'WebApp-${Stage}'
+      UserData:
+        Fn::Base64:
+          Fn::Sub: |
+            #!/bin/bash -ex
+            # Install Ruby
+            amazon-linux-extras install ruby2.6 -y
+            # Install the AWS CodeDeploy Agent
+            cd /home/ec2-user/
+            wget https://aws-codedeploy-${AWS::Region}.s3.amazonaws.com/releases/codedeploy-agent-1.1.2-1855.noarch.rpm
+            yum -y install codedeploy-agent-1.1.2-1855.noarch.rpm
+            # Install the Amazon CloudWatch Logs Agent
+            yum install -y awslogs-1.1.4
+            wget https://s3.amazonaws.com/aws-codedeploy-us-east-1/cloudwatch/codedeploy_logs.conf
+            mkdir -p /var/awslogs/etc/config
+            cp codedeploy_logs.conf /var/awslogs/etc/config/
+            sed -i 's/us-east-1/${AWS::Region}/g' /etc/awslogs/awscli.conf
+            # Start the service logs
+            service awslogs start
+    Type: AWS::EC2::Instance
+    
+  WebAppSG:
+    Description: The default Amazon EC2 security group that will be created for the Amazon EC2 Linux instances.
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable HTTP access via port 80 and SSH access via port 22.
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: '80'
+        ToPort: '80'
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: '22'
+        ToPort: '22'
+        CidrIp: 0.0.0.0/0
+      VpcId: !Ref 'VpcId'
