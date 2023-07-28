@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DisplayName("Tests for HelloWorldController")
 public class HelloWorldControllerTest {
 
-    private static final String EXPECTED_SITE_NAME = "home1";
-    private static final String EXPECTED_VIEW_NAME = "index1";
+    private static final String EXPECTED_SITE_NAME = "home";
+    private static final String EXPECTED_VIEW_NAME = "index";
 
     private HelloWorldController helloWorldController = new HelloWorldController(EXPECTED_SITE_NAME);
 
@@ -48,7 +48,6 @@ public class HelloWorldControllerTest {
         ModelAndView actualModelAndView = helloWorldController.helloWorld();
 
         // Verify the result obtained matches the values we expect.
-        System.out.println("%s", actualModelAndView.getViewName());
         assertEquals(EXPECTED_VIEW_NAME, actualModelAndView.getViewName());
         assertEquals(EXPECTED_SITE_NAME, String.valueOf(actualModelAndView.getModel().get("siteName")));
     }
