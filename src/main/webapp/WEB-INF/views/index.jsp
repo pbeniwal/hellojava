@@ -45,7 +45,7 @@
               <img src="${tweetSvg}" alt="Tweet"/>
           </a>
         <div class="text">
-          <h2>Hello to AWS DevOps Oct-2023 Batch of BirlaSoft!!!</h2>
+          <h2>Hello to AWS Developer Nov-2023 Batch</h2>
         </div>
       </div>
     </div>
