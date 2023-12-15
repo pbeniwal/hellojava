@@ -45,7 +45,7 @@
               <img src="${tweetSvg}" alt="Tweet"/>
           </a>
         <div class="text">
-          <h2>Hello to Advanced Architecting 6-Dec-2023 Batch of Delta Airlines!!!</h2>
+          <h2>Hello to CNAD 15-Dec-2023 Batch of Deloitte!!!</h2>
         </div>
       </div>
     </div>
