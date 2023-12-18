@@ -1,0 +1,1 @@
+aws cloudformation create-stack --stack-name hellojava-dev --template-body file://template.yml
