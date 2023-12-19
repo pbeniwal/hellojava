@@ -11,11 +11,11 @@ phases:
     commands:
       - mvn package
 reports:
-      arn:aws:codebuild:us-east-1:926976112852:report-group/demo: #test file information
-      files:
-        - 'TEST-com.aws.codestar.projecttemplates.controller.HelloWorldControllerTest.xml'
-      base-directory: 'target/surefire-reports'
-      discard-paths: false #do not remove file paths from test result files
+  SurefireReports: #test file information
+    files:
+      - '**/*'
+    base-directory: 'target/surefire-reports'
+    discard-paths: false #do not remove file paths from test result files
 artifacts:
   files:
     - 'appspec.yml'
