@@ -45,7 +45,7 @@
               <img src="${tweetSvg}" alt="Tweet"/>
           </a>
         <div class="text">
-          <h2>Hello to Deloitte Cloud Engineer - March Batch!</h2>
+          <h2>Hello to Deloitte Cloud Engineer - March-2024 Batch!</h2>
         </div>
       </div>
     </div>
